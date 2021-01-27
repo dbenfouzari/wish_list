@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wish_list/screens/authenticate/register.dart';
-import 'package:wish_list/screens/authenticate/sign_in.dart';
+import 'package:wish_list/screens/authenticate/sign_in_credentials.dart';
 
 // class AuthenticateScreen extends StatelessWidget {
 //   @override
@@ -26,7 +26,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
   @override
   Widget build(BuildContext context) {
     if (_showSignIn) {
-      return SignIn(toggleView: toggleView);
+      return SignInCredentials(toggleView: toggleView);
     } else {
       return Register(toggleView: toggleView);
     }

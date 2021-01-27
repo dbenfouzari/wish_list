@@ -1,34 +1,40 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class DatabaseService {
-  final String uid;
+  final String uid = FirebaseAuth.instance.currentUser.uid;
 
-  DatabaseService({this.uid});
-
-  /// =====
-  /// Users
-  /// =====
-  final CollectionReference _usersCollection = FirebaseFirestore.instance.collection('users');
+  //#region Users
+  //=============
+  final CollectionReference _usersCollection =
+      FirebaseFirestore.instance.collection('users');
 
   Future<DocumentSnapshot> getUser() async {
     return await _usersCollection.doc(uid).get();
   }
 
   Future createUser() async {
-    return await _usersCollection.doc(uid).set({'id': uid, 'created_at': new DateTime.now()});
+    return await _usersCollection
+        .doc(uid)
+        .set({'id': uid, 'created_at': new DateTime.now()});
   }
 
   Future<DocumentSnapshot> findOrCreateUser() async {
-    final user = await getUser();
-    if (user.exists) return user;
+    if (uid != null) {
+      final user = await getUser();
+      if (user.exists) return user;
 
-    await createUser();
-    return await getUser();
+      await createUser();
+      return await getUser();
+    }
+
+    return null;
   }
+  //=============
+  //#endregion
 
-  /// ==========
-  /// Wish lists
-  /// ==========
+  //#region Wish lists
+  //==================
   CollectionReference wishListsCollection =
       FirebaseFirestore.instance.collection('wish_lists');
 
@@ -39,4 +45,22 @@ class DatabaseService {
         .orderBy('created_at', descending: true)
         .where('user', isEqualTo: user.reference);
   }
+
+  Future<DocumentSnapshot> getWishList(String id) =>
+      wishListsCollection.doc(id).get();
+  //==================
+  //#endregion
+
+  //#region Wishes
+  //==============
+  CollectionReference wishesCollection =
+      FirebaseFirestore.instance.collection('wishes');
+
+  Future<Query> getWishes(String wishListId) async {
+    DocumentSnapshot wishList = await getWishList(wishListId);
+
+    return wishesCollection.where('list', isEqualTo: wishList.reference);
+  }
+  //==============
+  //#endregion
 }

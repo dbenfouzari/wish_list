@@ -40,9 +40,10 @@ Future<void> _showMyDialog(BuildContext context) async {
 }
 
 class WishListItem extends StatelessWidget {
+  final String id;
   final String title;
 
-  WishListItem({Key key, this.title}) : super(key: key);
+  WishListItem({Key key, this.id, this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,12 +51,12 @@ class WishListItem extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => WishesScreen(wishListTitle: title),
+            builder: (context) => WishesScreen(wishListId: id),
           ));
         },
         child: Center(
           child: Text(
-            this.title,
+            title,
             style: Theme.of(context).textTheme.subtitle1,
           ),
         ),
@@ -91,12 +92,12 @@ class WishListScreen extends StatelessWidget {
           Expanded(
             child: FutureBuilder<Query>(
               future: () async {
-                DatabaseService db = DatabaseService(uid: _auth.currentUser.uid);
+                DatabaseService db = DatabaseService();
                 return db.getWishListList();
               }(),
               builder: (context, snapshot) {
                 return StreamBuilder<QuerySnapshot>(
-                  stream: snapshot.data.snapshots(),
+                  stream: snapshot.data?.snapshots(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       print(snapshot.error.toString());
@@ -109,11 +110,14 @@ class WishListScreen extends StatelessWidget {
 
                     return GridView.builder(
                       padding: EdgeInsets.all(8.0),
-                      itemCount: snapshot.data.docs.length,
+                      itemCount: snapshot.data?.docs?.length,
                       itemBuilder: (BuildContext context, int index) {
-                        final list = snapshot.data.docs[index];
+                        final docs = snapshot.data?.docs;
+                        final id = docs != null ? docs[index].id : '';
+                        final title = docs != null ? docs[index]['title'] : '';
+
                         return Container(
-                          child: WishListItem(title: list["title"]),
+                          child: WishListItem(id: id, title: title),
                         );
                       },
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

@@ -4,16 +4,16 @@ import 'package:wish_list/services/auth.dart';
 import 'package:wish_list/shared/constants.dart';
 import 'package:wish_list/shared/loading.dart';
 
-class SignIn extends StatefulWidget {
+class SignInCredentials extends StatefulWidget {
   final Function toggleView;
 
-  SignIn({this.toggleView});
+  SignInCredentials({this.toggleView});
 
   @override
-  _SignInState createState() => _SignInState();
+  _SignInCredentialsState createState() => _SignInCredentialsState();
 }
 
-class _SignInState extends State<SignIn> {
+class _SignInCredentialsState extends State<SignInCredentials> {
   final AuthService _authService = AuthService();
   final _formKey = GlobalKey<FormState>();
   bool _loading = false;
@@ -96,13 +96,28 @@ class _SignInState extends State<SignIn> {
                       child: Text('Sign in'),
                     ),
                     SizedBox(height: 20.0),
-                    Text(
-                      error,
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontSize: 14.0,
-                      ),
+                    // Text(
+                    //   error,
+                    //   style: TextStyle(
+                    //     color: Colors.red,
+                    //     fontSize: 14.0,
+                    //   ),
+                    // ),
+                    // SizedBox(height: 20.0),
+                    Divider(),
+                    SizedBox(height: 20.0),
+                    InkWell(
+                      onTap: () async {
+                        await _authService.signInWithGoogle();
+                      },
+                      child: Text('Hello, World'),
                     ),
+                    RaisedButton(
+                      child: Text('Toto'),
+                      onPressed: () async {
+                        await _authService.signInWithGoogle();
+                      },
+                    )
                   ],
                 ),
               ),

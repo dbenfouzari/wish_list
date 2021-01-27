@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart' as FBAuth;
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:wish_list/models/user.dart';
 
 class AuthService {
@@ -55,6 +56,32 @@ class AuthService {
           email: email, password: password);
       FBAuth.User user = result.user;
       return _userFromFirebaseUser(user);
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  // sign in with Google
+  Future<FBAuth.UserCredential> signInWithGoogle() async {
+    try {
+      // Trigger the authentication flow
+      final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      // Create a new credential
+      final FBAuth.GoogleAuthCredential credential =
+          FBAuth.GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      // Once signed in, return the UserCredential
+      return await FBAuth.FirebaseAuth.instance
+          .signInWithCredential(credential);
     } catch (error) {
       print(error.toString());
       return null;
