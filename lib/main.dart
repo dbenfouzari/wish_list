@@ -12,13 +12,13 @@ void main() async {
 }
 
 ThemeData _darkTheme = ThemeData(
-  accentColor: Colors.blue,
+  accentColor: Colors.pinkAccent,
   brightness: Brightness.dark,
   primaryColor: Colors.pink,
 );
 
 ThemeData _lightTheme = ThemeData(
-  accentColor: Colors.pink,
+  accentColor: Colors.blueAccent,
   brightness: Brightness.light,
   primaryColor: Colors.blue,
 );
@@ -32,7 +32,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Wish List',
       theme: _lightTheme,
-      darkTheme: _darkTheme,
+      // darkTheme: _darkTheme,
       home: FutureBuilder(
         future: _initialization,
         builder: (context, snapshot) {

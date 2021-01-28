@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:wish_list/models/wish.dart';
 
 class DatabaseService {
   final String uid = FirebaseAuth.instance.currentUser.uid;
@@ -46,8 +47,10 @@ class DatabaseService {
         .where('user', isEqualTo: user.reference);
   }
 
-  Future<DocumentSnapshot> getWishList(String id) =>
-      wishListsCollection.doc(id).get();
+  Future<DocumentSnapshot> getWishList(String id) async {
+    return await wishListsCollection.doc(id).get();
+  }
+
   //==================
   //#endregion
 
@@ -60,6 +63,10 @@ class DatabaseService {
     DocumentSnapshot wishList = await getWishList(wishListId);
 
     return wishesCollection.where('list', isEqualTo: wishList.reference);
+  }
+
+  Future<void> updateWish(Wish wish) async {
+    return wishesCollection.doc(wish.id).update(wish.toMap());
   }
   //==============
   //#endregion
