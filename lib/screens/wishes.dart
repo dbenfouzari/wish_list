@@ -28,6 +28,10 @@ class _WishesScreenState extends State<WishesScreen> {
       appBar: AppBar(
         title: Text(widget.wishList.title),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
+      ),
       body: Column(
         children: [
           Expanded(
@@ -98,6 +102,8 @@ class _WishesScreenState extends State<WishesScreen> {
                                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                                           child: Text(
                                             wish.title,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
                                             style: Theme.of(context).textTheme.bodyText1,
                                           ),
                                         ),
@@ -128,20 +134,24 @@ class _WishesScreenState extends State<WishesScreen> {
                                     ],
                                   ),
                                 ),
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                                    child: Text(
-                                      wish.description ?? '',
-                                      maxLines: 3,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: Theme.of(context).textTheme.subtitle1.copyWith(
-                                            color: Colors.grey[600],
-                                            fontSize: 12.0,
-                                          ),
-                                      softWrap: true,
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                        child: Text(
+                                          wish.description ?? '',
+                                          maxLines: 3,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: Theme.of(context).textTheme.subtitle1.copyWith(
+                                                color: Colors.grey[600],
+                                                fontSize: 12.0,
+                                              ),
+                                          softWrap: true,
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                  ],
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,

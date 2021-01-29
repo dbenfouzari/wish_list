@@ -44,11 +44,16 @@ class WishBottomSheet extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text(
-                          wish.title,
-                          style: Theme.of(context).textTheme.bodyText1,
+                        Expanded(
+                          child: Text(
+                            wish.title,
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
                         ),
                       ],
+                    ),
+                    SizedBox(
+                      height: 12,
                     ),
                     Row(
                       children: [
@@ -58,6 +63,9 @@ class WishBottomSheet extends StatelessWidget {
                           ),
                         ),
                       ],
+                    ),
+                    SizedBox(
+                      height: 12,
                     ),
                     Row(
                       children: [
