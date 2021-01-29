@@ -11,8 +11,12 @@ class WishList {
   @override
   toString() => this.title;
 
-  WishList(
-      {@required this.title, @required this.user, @required this.created_at, @required this.id});
+  WishList({
+    @required this.title,
+    @required this.user,
+    @required this.created_at,
+    @required this.id
+  });
 
   WishList.fromDoc(QueryDocumentSnapshot doc) {
     created_at = doc.data()['created_at'];

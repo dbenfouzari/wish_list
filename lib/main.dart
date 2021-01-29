@@ -18,6 +18,7 @@ ThemeData _darkTheme = ThemeData(
 );
 
 ThemeData _lightTheme = ThemeData(
+  backgroundColor: Colors.white,
   accentColor: Colors.blueAccent,
   brightness: Brightness.light,
   primaryColor: Colors.blue,

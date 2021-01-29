@@ -24,13 +24,24 @@ class Wish {
 
   Wish.fromDoc(QueryDocumentSnapshot doc) {
     id = doc.id;
-    url = doc.data()['url'];
-    title = doc.data()['title'];
+    url = doc.data()['url'] ?? '';
+    title = doc.data()['title'] ?? '';
     list = doc.data()['list'];
     created_at = doc.data()['created_at'];
-    taken = doc.data()['taken'];
-    favorite = doc.data()['favorite'];
-    description = doc.data()['description'];
+    taken = doc.data()['taken'] ?? false;
+    favorite = doc.data()['favorite'] ?? false;
+    description = doc.data()['description'] ?? '';
+  }
+
+  Wish.fromDocumentSnapshot(DocumentSnapshot doc) {
+    id = doc.id;
+    url = doc.data()['url'] ?? '';
+    title = doc.data()['title'] ?? '';
+    list = doc.data()['list'];
+    created_at = doc.data()['created_at'];
+    taken = doc.data()['taken'] ?? false;
+    favorite = doc.data()['favorite'] ?? false;
+    description = doc.data()['description'] ?? '';
   }
 
   @override
@@ -57,14 +68,15 @@ class Wish {
     bool favorite,
     String description,
     Timestamp created_at,
-  }) => Wish(
-    id: this.id,
-    created_at: this.created_at,
-    title: title ?? this.title,
-    list: list ?? this.list,
-    description: description ?? this.description,
-    favorite: favorite ?? this.favorite,
-    taken: taken ?? this.taken,
-    url: url ?? this.url,
-  );
+  }) =>
+      Wish(
+        id: this.id,
+        created_at: this.created_at,
+        title: title ?? this.title,
+        list: list ?? this.list,
+        description: description ?? this.description,
+        favorite: favorite ?? this.favorite,
+        taken: taken ?? this.taken,
+        url: url ?? this.url,
+      );
 }

@@ -68,6 +68,8 @@ class DatabaseService {
   Future<void> updateWish(Wish wish) async {
     return wishesCollection.doc(wish.id).update(wish.toMap());
   }
+
+  DocumentReference getWish(String wishId) => wishesCollection.doc(wishId);
   //==============
   //#endregion
 }

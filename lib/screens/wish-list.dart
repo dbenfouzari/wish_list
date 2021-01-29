@@ -72,71 +72,73 @@ class WishListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Liste de voeux'),
-        actions: <Widget>[
-          FlatButton.icon(
-            icon: Icon(Icons.account_circle),
-            onPressed: () async {
-              await _auth.signOut();
-            },
-            label: Text('Logout'),
-          )
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _showMyDialog(context),
-        child: Icon(Icons.add),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: FutureBuilder<Query>(
-              future: () async {
-                DatabaseService db = DatabaseService();
-                return db.getWishListList();
-              }(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Loading();
-                }
-
-                return StreamBuilder<QuerySnapshot>(
-                  stream: snapshot.data?.snapshots(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) {
-                      print(snapshot.error.toString());
-                      return Text('Something went wrong.');
-                    }
-
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Loading();
-                    }
-
-                    return GridView.builder(
-                      padding: EdgeInsets.all(8.0),
-                      itemCount: snapshot.data?.docs?.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final doc = snapshot.data?.docs[index];
-                        final wishList = WishList.fromDoc(doc);
-
-                        return Container(
-                          child: WishListItem(list: wishList),
-                        );
-                      },
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 4.0,
-                          mainAxisSpacing: 4.0,
-                          childAspectRatio: 2),
-                    );
-                  },
-                );
+    return Theme(
+      data: Theme.of(context),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Liste de voeux'),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.logout),
+              onPressed: () async {
+                await _auth.signOut();
               },
             ),
-          ),
-        ],
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => _showMyDialog(context),
+          child: Icon(Icons.add),
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: FutureBuilder<Query>(
+                future: () async {
+                  DatabaseService db = DatabaseService();
+                  return db.getWishListList();
+                }(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Loading();
+                  }
+
+                  return StreamBuilder<QuerySnapshot>(
+                    stream: snapshot.data?.snapshots(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        print(snapshot.error.toString());
+                        return Text('Something went wrong.');
+                      }
+
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Loading();
+                      }
+
+                      return GridView.builder(
+                        padding: EdgeInsets.all(8.0),
+                        itemCount: snapshot.data?.docs?.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final doc = snapshot.data?.docs[index];
+                          final wishList = WishList.fromDoc(doc);
+
+                          return Container(
+                            child: WishListItem(list: wishList),
+                          );
+                        },
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 4.0,
+                            mainAxisSpacing: 4.0,
+                            childAspectRatio: 2),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
