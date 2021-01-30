@@ -20,7 +20,7 @@ class _NewWishListFormState extends State<NewWishListForm> {
     super.dispose();
   }
 
-  void _handleSubmit () {
+  void _handleSubmit() {
     if (_formKey.currentState.validate()) {
       try {
         _db.createWishList(_listTitleController.text);
@@ -59,12 +59,22 @@ class _NewWishListFormState extends State<NewWishListForm> {
               onEditingComplete: _handleSubmit,
             ),
           ),
-          RaisedButton(
-            child: Text(
-              tr(LocaleKeys.common_forms_submit),
-            ),
-            onPressed: _handleSubmit,
-          )
+          SizedBox(
+            height: 12,
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: RaisedButton(
+                  color: Theme.of(context).primaryColor,
+                  child: Text(
+                    tr(LocaleKeys.common_forms_submit),
+                  ),
+                  onPressed: _handleSubmit,
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );

@@ -33,7 +33,10 @@ class _NewWishFormState extends State<NewWishForm> {
         _db.createWish(_wishTitle.text, _wishDescription.text, widget.wishList);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text("Vœu \"${_wishTitle.text}\" créée avec succès."),
+            backgroundColor: Theme.of(context).backgroundColor,
+            content: Text(
+              "Vœu \"${_wishTitle.text}\" créée avec succès.",
+            ),
           ),
         );
         Navigator.of(context).pop();
@@ -80,6 +83,7 @@ class _NewWishFormState extends State<NewWishForm> {
             children: [
               Expanded(
                 child: RaisedButton(
+                  color: Theme.of(context).primaryColor,
                   child: Text(
                     tr(LocaleKeys.common_forms_submit),
                   ),

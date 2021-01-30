@@ -45,7 +45,7 @@ class App extends StatelessWidget {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       title: 'Wish List',
-      theme: _lightTheme,
+      theme: _darkTheme,
       // darkTheme: _darkTheme,
       home: FutureBuilder(
         future: _initialization,

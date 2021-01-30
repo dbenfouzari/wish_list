@@ -96,7 +96,7 @@ class _WishesScreenState extends State<WishesScreen> {
                                 await _db.removeWish(wish.id);
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                    content: Text('Hello'),
+                                    content: Text('Successfully removed wish.'),
                                   ),
                                 );
                               },

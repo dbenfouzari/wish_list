@@ -40,7 +40,13 @@ class WishListItem extends StatelessWidget {
       child: SlidableActions(
         onDelete: () async {
           await _db.removeWishList(list.id);
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Hello')));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'Successfully removed wish list.',
+              ),
+            ),
+          );
         },
         child: InkWell(
           onTap: () {
@@ -48,7 +54,11 @@ class WishListItem extends StatelessWidget {
               builder: (context) => WishesScreen(wishList: list),
             ));
           },
-          child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 24.0,
+              vertical: 12.0,
+            ),
             child: Text(
               list.title,
               style: Theme.of(context).textTheme.subtitle1,
