@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:wish_list/generated/locale_keys.g.dart';
 import 'package:wish_list/models/wish-list.dart';
 import 'package:wish_list/services/database.dart';
 
@@ -52,7 +54,7 @@ class _NewWishFormState extends State<NewWishForm> {
             controller: _wishTitle,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
-              hintText: "Nom du vœu",
+              hintText: tr(LocaleKeys.forms_wish_name),
             ),
             validator: (value) {
               if (value.isEmpty) {
@@ -68,7 +70,7 @@ class _NewWishFormState extends State<NewWishForm> {
             textInputAction: TextInputAction.done,
             onEditingComplete: _handleSubmit,
             decoration: InputDecoration(
-              hintText: "Description du vœu",
+              hintText: tr(LocaleKeys.forms_wish_description),
             ),
           ),
           SizedBox(
@@ -79,7 +81,7 @@ class _NewWishFormState extends State<NewWishForm> {
               Expanded(
                 child: RaisedButton(
                   child: Text(
-                    'Submit',
+                    tr(LocaleKeys.common_forms_submit),
                   ),
                   onPressed: _handleSubmit,
                 ),

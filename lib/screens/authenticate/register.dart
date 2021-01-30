@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:wish_list/generated/locale_keys.g.dart';
 import 'package:wish_list/models/user.dart';
 import 'package:wish_list/services/auth.dart';
 import 'package:wish_list/shared/constants.dart';
@@ -30,8 +32,7 @@ class _RegisterState extends State<Register> {
     if (_formKey.currentState.validate()) {
       setState(() => _loading = true);
 
-      User result =
-          await _authService.registerWithEmailAndPassword(email, password);
+      User result = await _authService.registerWithEmailAndPassword(email, password);
 
       if (result == null) {
         setState(() {
@@ -48,12 +49,12 @@ class _RegisterState extends State<Register> {
         ? Loading()
         : Scaffold(
             appBar: AppBar(
-              title: Text("S'inscrire"),
+              title: Text(tr(LocaleKeys.screens_register_title)),
               actions: <Widget>[
                 FlatButton.icon(
                   icon: Icon(Icons.account_circle),
                   onPressed: () => widget.toggleView(),
-                  label: Text("Se connecter"),
+                  label: Text(tr(LocaleKeys.screens_signIn_title)),
                 ),
               ],
             ),
@@ -66,31 +67,31 @@ class _RegisterState extends State<Register> {
                     SizedBox(height: 20.0),
                     TextFormField(
                       decoration: textInputDecoration.copyWith(
-                          hintText: "Adresse mail"),
+                        hintText: tr(LocaleKeys.forms_register_email),
+                      ),
                       keyboardType: TextInputType.emailAddress,
                       onChanged: (value) {
                         setState(() => email = value);
                       },
-                      validator: (value) =>
-                          value.isEmpty ? "Enter an email" : null,
+                      validator: (value) => value.isEmpty ? "Enter an email" : null,
                     ),
                     SizedBox(height: 20.0),
                     TextFormField(
                       decoration: textInputDecoration.copyWith(
-                          hintText: "Mot de passe"),
+                        hintText: tr(LocaleKeys.forms_register_password),
+                      ),
                       obscureText: true,
                       onChanged: (value) {
                         setState(() => password = value);
                       },
-                      validator: (value) => value.length < 6
-                          ? "Enter a password 6+ chars long"
-                          : null,
+                      validator: (value) =>
+                          value.length < 6 ? "Enter a password 6+ chars long" : null,
                     ),
                     SizedBox(height: 20.0),
                     RaisedButton(
                       onPressed: _handleSignUp,
                       color: Colors.pink,
-                      child: Text('Register'),
+                      child: Text(tr(LocaleKeys.forms_register_submit)),
                     ),
                     SizedBox(height: 20.0),
                     Text(

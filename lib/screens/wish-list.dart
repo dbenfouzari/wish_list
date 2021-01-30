@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:wish_list/forms/new-wish-list.dart';
+import 'package:wish_list/generated/locale_keys.g.dart';
 import 'package:wish_list/models/wish-list.dart';
 import 'package:wish_list/screens/wishes.dart';
 import 'package:wish_list/services/auth.dart';
@@ -15,7 +17,7 @@ Future<void> _showMyDialog(BuildContext context) async {
     builder: (BuildContext context) {
       return SimpleDialog(
         contentPadding: EdgeInsets.all(24.0),
-        title: Text('Nouvelle liste'),
+        title: Text(tr(LocaleKeys.forms_wishList_title)),
         children: [
           NewWishListForm(),
         ],
@@ -67,7 +69,7 @@ class WishListScreen extends StatelessWidget {
       data: Theme.of(context),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Liste de vœux'),
+          title: Text(tr(LocaleKeys.screens_wishList_title)),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.logout),

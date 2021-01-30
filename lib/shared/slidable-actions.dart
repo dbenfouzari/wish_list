@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:wish_list/generated/locale_keys.g.dart';
 
 class SlidableActions extends StatelessWidget {
   final Widget child;
@@ -14,7 +16,7 @@ class SlidableActions extends StatelessWidget {
       actionExtentRatio: 0.5,
       actions: <Widget>[
         IconSlideAction(
-          caption: 'Supprimer',
+          caption: tr(LocaleKeys.common_forms_delete),
           color: Colors.redAccent,
           icon: Icons.delete_forever,
           onTap: onDelete,

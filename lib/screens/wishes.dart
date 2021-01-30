@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:wish_list/components/wish-bottom-sheet.dart';
 import 'package:wish_list/forms/new-wish.dart';
+import 'package:wish_list/generated/locale_keys.g.dart';
 import 'package:wish_list/models/wish-list.dart';
 import 'package:wish_list/models/wish.dart';
 import 'package:wish_list/services/database.dart';
@@ -14,7 +16,7 @@ Future<void> _shownNewWishForm(BuildContext context, WishList wishList) async {
     builder: (BuildContext context) {
       return SimpleDialog(
         contentPadding: EdgeInsets.all(24.0),
-        title: Text('Nouveau vœu'),
+        title: Text(tr(LocaleKeys.forms_wish_title)),
         children: [
           NewWishForm(wishList: wishList),
         ],

@@ -1,0 +1,41 @@
+{
+  "screens": {
+    "register": {
+      "title": "Register"
+    },
+    "signIn": {
+      "title": "Sign in"
+    },
+    "wishList": {
+      "title": "Wish Lists"
+    }
+  },
+  "forms": {
+    "register": {
+      "email": "Email",
+      "password": "Password",
+      "submit": "Register"
+    },
+    "signIn": {
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign in",
+      "googleSubmit": "Sign in with Google"
+    },
+    "wishList": {
+      "title": "Add wish list",
+      "name": "List name"
+    },
+    "wish": {
+      "title": "New wish",
+      "name": "Wish name",
+      "description": "Wish description"
+    }
+  },
+  "common": {
+    "forms": {
+      "delete": "Remove",
+      "submit": "Submit"
+    }
+  }
+}

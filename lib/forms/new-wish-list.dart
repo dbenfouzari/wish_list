@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:wish_list/generated/locale_keys.g.dart';
 import 'package:wish_list/services/database.dart';
 
 class NewWishListForm extends StatefulWidget {
@@ -46,7 +48,7 @@ class _NewWishListFormState extends State<NewWishListForm> {
               autofocus: true,
               controller: _listTitleController,
               decoration: InputDecoration(
-                hintText: "Nom de la liste",
+                hintText: tr(LocaleKeys.forms_wishList_name),
               ),
               validator: (value) {
                 if (value.isEmpty) {
@@ -59,7 +61,7 @@ class _NewWishListFormState extends State<NewWishListForm> {
           ),
           RaisedButton(
             child: Text(
-              'Submit',
+              tr(LocaleKeys.common_forms_submit),
             ),
             onPressed: _handleSubmit,
           )

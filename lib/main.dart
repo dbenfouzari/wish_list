@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wish_list/generated/codegen_loader.g.dart';
 import 'package:wish_list/models/user.dart';
 import 'package:wish_list/screens/wrapper.dart';
 import 'package:wish_list/services/auth.dart';
@@ -8,7 +10,15 @@ import 'package:wish_list/shared/loading.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(App());
+  runApp(
+    EasyLocalization(
+      supportedLocales: [Locale('en', ''), Locale('fr', '')],
+      path: 'resources/langs',
+      fallbackLocale: Locale('en', ''),
+      assetLoader: CodegenLoader(),
+      child: App(),
+    ),
+  );
 }
 
 ThemeData _darkTheme = ThemeData(
@@ -31,6 +41,9 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       title: 'Wish List',
       theme: _lightTheme,
       // darkTheme: _darkTheme,

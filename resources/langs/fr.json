@@ -1,0 +1,41 @@
+{
+  "screens": {
+    "register": {
+      "title": "S'inscrire"
+    },
+    "signIn": {
+      "title": "Se connecter"
+    },
+    "wishList": {
+      "title": "Listes de vœux"
+    }
+  },
+  "forms": {
+    "register": {
+      "email": "Adresse mail",
+      "password": "Mot de passe",
+      "submit": "S'inscrire"
+    },
+    "signIn": {
+      "email": "Adresse mail",
+      "password": "Mot de passe",
+      "submit": "Se connecter",
+      "googleSubmit": "Se connecter avec Google"
+    },
+    "wishList": {
+      "title": "Ajouter une liste",
+      "name": "Nom de la liste"
+    },
+    "wish": {
+      "title": "Ajouter un vœu",
+      "name": "Nom du vœu",
+      "description": "Description du vœu"
+    }
+  },
+  "common": {
+    "forms": {
+      "delete": "Supprimer",
+      "submit": "Valider"
+    }
+  }
+}
