@@ -37,6 +37,8 @@ class WishListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       clipBehavior: Clip.antiAlias,
+      elevation: 32,
+      shadowColor: Color.fromARGB(80, 0, 0, 0),
       child: SlidableActions(
         onDelete: () async {
           await _db.removeWishList(list.id);
@@ -119,7 +121,7 @@ class WishListScreen extends StatelessWidget {
                       }
 
                       return GridView.builder(
-                        padding: EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(12.0),
                         itemCount: snapshot.data?.docs?.length,
                         itemBuilder: (BuildContext context, int index) {
                           final doc = snapshot.data?.docs[index];
@@ -131,8 +133,8 @@ class WishListScreen extends StatelessWidget {
                         },
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
-                            crossAxisSpacing: 4.0,
-                            mainAxisSpacing: 4.0,
+                            crossAxisSpacing: 12.0,
+                            mainAxisSpacing: 12.0,
                             childAspectRatio: 2),
                       );
                     },
