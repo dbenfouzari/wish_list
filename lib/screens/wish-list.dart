@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:wish_list/forms/new-wish-list.dart';
 import 'package:wish_list/models/wish-list.dart';
 import 'package:wish_list/screens/wishes.dart';
 import 'package:wish_list/services/auth.dart';
 import 'package:wish_list/services/database.dart';
 import 'package:wish_list/shared/loading.dart';
+import 'package:wish_list/shared/slidable-actions.dart';
 
 Future<void> _showMyDialog(BuildContext context) async {
   return showDialog<void>(
@@ -35,20 +35,11 @@ class WishListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       clipBehavior: Clip.antiAlias,
-      child: Slidable(
-        actionPane: SlidableScrollActionPane(),
-        actionExtentRatio: 0.5,
-        actions: <Widget>[
-          IconSlideAction(
-            caption: 'Supprimer',
-            color: Colors.redAccent,
-            icon: Icons.delete_forever,
-            onTap: () async {
-              await _db.removeWishList(list.id);
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Hello')));
-            },
-          ),
-        ],
+      child: SlidableActions(
+        onDelete: () async {
+          await _db.removeWishList(list.id);
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Hello')));
+        },
         child: InkWell(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
