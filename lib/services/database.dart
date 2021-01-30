@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wish_list/models/wish-list.dart';
 import 'package:wish_list/models/wish.dart';
-import 'package:wish_list/utils.dart';
 
 class DatabaseService {
   final String uid = FirebaseAuth.instance.currentUser.uid;
@@ -57,7 +56,7 @@ class DatabaseService {
       WishList(
         title: title,
         user: user.reference,
-        created_at: Timestamp.now(),
+        createdAt: Timestamp.now(),
       ).toMap(),
     );
   }
@@ -90,7 +89,7 @@ class DatabaseService {
       title: title,
       description: description,
       list: wishList.ref,
-      created_at: Timestamp.now(),
+      createdAt: Timestamp.now(),
     ).toMap());
   }
 

@@ -5,7 +5,7 @@ import 'package:wish_list/utils.dart';
 class WishList {
   String title;
   DocumentReference user;
-  Timestamp created_at;
+  Timestamp createdAt;
   String id;
   DocumentReference ref;
 
@@ -13,10 +13,10 @@ class WishList {
   toString() => this.title;
 
   WishList(
-      {@required this.title, @required this.user, @required this.created_at, @required this.id});
+      {@required this.title, @required this.user, @required this.createdAt, this.id});
 
   WishList.fromDoc(QueryDocumentSnapshot doc) {
-    created_at = doc.data()['created_at'];
+    createdAt = doc.data()['created_at'];
     title = doc.data()['title'];
     user = doc.data()['user'];
     id = doc.id;
@@ -26,7 +26,7 @@ class WishList {
   Map<String, dynamic> toMap() {
     return removeNulls(
       {
-        'created_at': created_at,
+        'created_at': createdAt,
         'title': title,
         'user': user,
         'id': id,

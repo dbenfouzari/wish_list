@@ -10,14 +10,14 @@ class Wish {
   DocumentReference list;
   bool favorite;
   String description;
-  Timestamp created_at;
+  Timestamp createdAt;
 
   Wish({
     this.id,
     this.url,
     @required this.title,
     @required this.list,
-    this.created_at,
+    this.createdAt,
     this.taken,
     this.favorite,
     this.description,
@@ -28,7 +28,7 @@ class Wish {
     url = doc.data()['url'] ?? '';
     title = doc.data()['title'] ?? '';
     list = doc.data()['list'];
-    created_at = doc.data()['created_at'];
+    createdAt = doc.data()['created_at'];
     taken = doc.data()['taken'] ?? false;
     favorite = doc.data()['favorite'] ?? false;
     description = doc.data()['description'] ?? '';
@@ -39,7 +39,7 @@ class Wish {
     url = doc.data()['url'] ?? '';
     title = doc.data()['title'] ?? '';
     list = doc.data()['list'];
-    created_at = doc.data()['created_at'];
+    createdAt = doc.data()['created_at'];
     taken = doc.data()['taken'] ?? false;
     favorite = doc.data()['favorite'] ?? false;
     description = doc.data()['description'] ?? '';
@@ -55,7 +55,7 @@ class Wish {
           'url': this.url,
           'title': this.title,
           'list': this.list,
-          'created_at': this.created_at,
+          'created_at': this.createdAt,
           'taken': this.taken,
           'favorite': this.favorite,
           'description': this.description,
@@ -72,11 +72,11 @@ class Wish {
     DocumentReference list,
     bool favorite,
     String description,
-    Timestamp created_at,
+    Timestamp createdAt,
   }) =>
       Wish(
         id: this.id,
-        created_at: this.created_at,
+        createdAt: this.createdAt,
         title: title ?? this.title,
         list: list ?? this.list,
         description: description ?? this.description,

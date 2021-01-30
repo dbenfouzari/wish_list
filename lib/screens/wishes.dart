@@ -9,7 +9,6 @@ import 'package:wish_list/models/wish-list.dart';
 import 'package:wish_list/models/wish.dart';
 import 'package:wish_list/services/database.dart';
 import 'package:wish_list/shared/loading.dart';
-import 'package:wish_list/shared/slidable-actions.dart';
 
 Future<void> _shownNewWishForm(BuildContext context, WishList wishList) async {
   return showDialog<void>(
