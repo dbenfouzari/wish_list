@@ -5,14 +5,13 @@ import 'package:wish_list/services/database.dart';
 class NewWishForm extends StatefulWidget {
   final WishList wishList;
 
-  NewWishForm({ Key key, @required this.wishList });
+  NewWishForm({Key key, @required this.wishList});
 
   @override
   _NewWishFormState createState() => _NewWishFormState();
 }
 
 class _NewWishFormState extends State<NewWishForm> {
-
   final _formKey = GlobalKey<FormState>();
   final _wishTitle = TextEditingController();
   final _wishDescription = TextEditingController();
@@ -26,13 +25,13 @@ class _NewWishFormState extends State<NewWishForm> {
     super.dispose();
   }
 
-  void _handleSubmit () {
+  void _handleSubmit() {
     if (_formKey.currentState.validate()) {
       try {
         _db.createWish(_wishTitle.text, _wishDescription.text, widget.wishList);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text("Voeu \"${_wishTitle.text}\" créée avec succès."),
+            content: Text("Vœu \"${_wishTitle.text}\" créée avec succès."),
           ),
         );
         Navigator.of(context).pop();
@@ -53,11 +52,11 @@ class _NewWishFormState extends State<NewWishForm> {
             controller: _wishTitle,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
-              hintText: "Nom du voeu",
+              hintText: "Nom du vœu",
             ),
             validator: (value) {
               if (value.isEmpty) {
-                return "Please enter some text";
+                return "Veuillez entrer le nom du vœu.";
               }
               return null;
             },
@@ -69,14 +68,23 @@ class _NewWishFormState extends State<NewWishForm> {
             textInputAction: TextInputAction.done,
             onEditingComplete: _handleSubmit,
             decoration: InputDecoration(
-              hintText: "Description du voeu",
+              hintText: "Description du vœu",
             ),
           ),
-          RaisedButton(
-            child: Text(
-              'Submit',
-            ),
-            onPressed: _handleSubmit,
+          SizedBox(
+            height: 12,
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: RaisedButton(
+                  child: Text(
+                    'Submit',
+                  ),
+                  onPressed: _handleSubmit,
+                ),
+              ),
+            ],
           )
         ],
       ),

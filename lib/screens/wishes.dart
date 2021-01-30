@@ -14,7 +14,7 @@ Future<void> _shownNewWishForm(BuildContext context, WishList wishList) async {
     builder: (BuildContext context) {
       return SimpleDialog(
         contentPadding: EdgeInsets.all(24.0),
-        title: Text('Nouveau voeu'),
+        title: Text('Nouveau vœu'),
         children: [
           NewWishForm(wishList: wishList),
         ],

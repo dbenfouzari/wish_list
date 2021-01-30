@@ -67,7 +67,7 @@ class WishListScreen extends StatelessWidget {
       data: Theme.of(context),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Liste de voeux'),
+          title: Text('Liste de vœux'),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.logout),
