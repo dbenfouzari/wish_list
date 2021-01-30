@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:wish_list/utils.dart';
 
 class Wish {
   String id;
@@ -12,7 +13,7 @@ class Wish {
   Timestamp created_at;
 
   Wish({
-    @required this.id,
+    this.id,
     this.url,
     @required this.title,
     @required this.list,
@@ -47,16 +48,20 @@ class Wish {
   @override
   String toString() => this.title;
 
-  Map toMap() {
-    return Map<String, dynamic>.from({
-      'url': this.url,
-      'title': this.title,
-      'list': this.list,
-      'created_at': this.created_at,
-      'taken': this.taken,
-      'favorite': this.favorite,
-      'description': this.description,
-    });
+  Map<String, dynamic> toMap() {
+    return removeNulls(
+      Map<String, dynamic>.from(
+        {
+          'url': this.url,
+          'title': this.title,
+          'list': this.list,
+          'created_at': this.created_at,
+          'taken': this.taken,
+          'favorite': this.favorite,
+          'description': this.description,
+        },
+      ),
+    );
   }
 
   Wish copyWith({

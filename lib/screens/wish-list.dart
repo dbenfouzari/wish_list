@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:wish_list/forms/new-wish-list.dart';
 import 'package:wish_list/models/wish-list.dart';
 import 'package:wish_list/screens/wishes.dart';
 import 'package:wish_list/services/auth.dart';
@@ -9,31 +11,13 @@ import 'package:wish_list/shared/loading.dart';
 Future<void> _showMyDialog(BuildContext context) async {
   return showDialog<void>(
     context: context,
-    barrierDismissible: false, // user must tap button!
+    barrierDismissible: true,
     builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text('AlertDialog Title'),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: <Widget>[
-              Text(
-                'This is a demo alert dialog.',
-                style: TextStyle(color: Colors.red),
-              ),
-              Text('Would you like to approve of this message?'),
-            ],
-          ),
-        ),
-        actions: <Widget>[
-          TextButton(
-            child: Text('Approve'),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          TextButton.icon(
-            icon: Icon(Icons.add),
-            label: Text('Toto'),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
+      return SimpleDialog(
+        contentPadding: EdgeInsets.all(24.0),
+        title: Text('Nouvelle liste'),
+        children: [
+          NewWishListForm(),
         ],
       );
     },
@@ -41,25 +25,41 @@ Future<void> _showMyDialog(BuildContext context) async {
 }
 
 class WishListItem extends StatelessWidget {
-  // final String id;
-  // final String title;
   final WishList list;
+
+  final _db = DatabaseService();
 
   WishListItem({Key key, this.list}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: InkWell(
-        onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => WishesScreen(wishList: list),
-          ));
-        },
-        child: Center(
-          child: Text(
-            list.title,
-            style: Theme.of(context).textTheme.subtitle1,
+      clipBehavior: Clip.antiAlias,
+      child: Slidable(
+        actionPane: SlidableScrollActionPane(),
+        actionExtentRatio: 0.5,
+        actions: <Widget>[
+          IconSlideAction(
+            caption: 'Supprimer',
+            color: Colors.redAccent,
+            icon: Icons.delete_forever,
+            onTap: () async {
+              await _db.removeWishList(list.id);
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Hello')));
+            },
+          ),
+        ],
+        child: InkWell(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => WishesScreen(wishList: list),
+            ));
+          },
+          child: Center(
+            child: Text(
+              list.title,
+              style: Theme.of(context).textTheme.subtitle1,
+            ),
           ),
         ),
       ),
