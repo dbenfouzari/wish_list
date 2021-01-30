@@ -30,44 +30,39 @@ class WishItem extends StatelessWidget {
           onTap: onTap,
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  IconButton(
-                    padding: EdgeInsets.only(
-                      top: 4.0,
-                      left: 4.0,
-                      right: 8.0,
-                      bottom: 8.0,
-                    ),
-                    constraints: BoxConstraints(),
-                    icon: Icon(
-                      wish.favorite ?? false ? Icons.favorite : Icons.favorite_border,
-                      color: wish.favorite ?? false ? Colors.pinkAccent : Colors.grey[400],
-                    ),
-                    onPressed: () async {
-                      final Wish nextWish = wish.copyWith(favorite: !(wish.favorite ?? false));
-
-                      _db.updateWish(nextWish);
-                    },
-                  ),
-                ],
-              ),
               Expanded(
-                child: CachedNetworkImage(
-                  imageUrl:
-                      "https://images-na.ssl-images-amazon.com/images/I/71k47LPEkuL._AC_SL1500_.jpg",
-                  imageBuilder: (context, imageProvider) => Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: imageProvider,
-                        fit: BoxFit.cover,
-                        // colorFilter: ColorFilter.mode(Colors.red, BlendMode.colorBurn),
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: CachedNetworkImageProvider(
+                        "https://images-na.ssl-images-amazon.com/images/I/71k47LPEkuL._AC_SL1500_.jpg",
                       ),
                     ),
                   ),
-                  placeholder: (context, url) => CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      IconButton(
+                        padding: EdgeInsets.only(
+                          top: 8.0,
+                          left: 8.0,
+                          right: 8.0,
+                          bottom: 8.0,
+                        ),
+                        constraints: BoxConstraints(),
+                        icon: Icon(
+                          wish.favorite ?? false ? Icons.favorite : Icons.favorite_border,
+                          color: wish.favorite ?? false ? Colors.pinkAccent : Colors.grey[400],
+                        ),
+                        onPressed: () async {
+                          final Wish nextWish = wish.copyWith(favorite: !(wish.favorite ?? false));
+
+                          _db.updateWish(nextWish);
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Row(
@@ -79,7 +74,7 @@ class WishItem extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text(
                           wish.title,
-                          maxLines: 2,
+                          maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.bodyText1,
                         ),
@@ -95,7 +90,7 @@ class WishItem extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Text(
                         wish.description ?? '',
-                        maxLines: 3,
+                        maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.subtitle1.copyWith(
                               color: Colors.grey[600],
