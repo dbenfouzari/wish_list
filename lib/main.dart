@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wish_list/generated/codegen_loader.g.dart';
 import 'package:wish_list/models/user.dart';
+import 'package:wish_list/screens/test.dart';
 import 'package:wish_list/screens/wrapper.dart';
 import 'package:wish_list/services/auth.dart';
 import 'package:wish_list/shared/loading.dart';
@@ -64,7 +65,8 @@ class App extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             return StreamProvider<User>.value(
               value: AuthService().user,
-              child: Wrapper(),
+              // child: Wrapper(),
+              child: ContactList(),
             );
           }
 
